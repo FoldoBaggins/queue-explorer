@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/queue-explorer/static/css/main.4a4bcfa2.css",
+    "main.js": "/queue-explorer/static/js/main.df9bd7b2.js",
+    "index.html": "/queue-explorer/index.html",
+    "main.4a4bcfa2.css.map": "/queue-explorer/static/css/main.4a4bcfa2.css.map",
+    "main.df9bd7b2.js.map": "/queue-explorer/static/js/main.df9bd7b2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4a4bcfa2.css",
+    "static/js/main.df9bd7b2.js"
+  ]
+}
