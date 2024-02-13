@@ -69,10 +69,10 @@ export const fetchExitedValidators = async():Promise<number> => {
   return Number(await (poolContract as any).exitedValidators());
 }
 
-export const applyDilutionTolerance = (stakerIndex:number, exitedValidators:number) => {
+export const applyDilutionTolerance = (activatedIndex:number, exitedValidators:number) => {
 
-  console.log("indexWithDilutionTolernace: ",stakerIndex+(stakerIndex-1305)*DILUTION_PERCENTAGE)
-  return Math.ceil(stakerIndex+(stakerIndex-exitedValidators)*DILUTION_PERCENTAGE)
+  console.log("indexWithDilutionTolerance: ",activatedIndex+(activatedIndex-1305)*DILUTION_PERCENTAGE)
+  return Math.ceil(activatedIndex+(activatedIndex-exitedValidators)*DILUTION_PERCENTAGE)
 }
 
 export const _timeLeft= (validatorsAhead:number):Array<number>  => {

@@ -5,18 +5,18 @@ import Message from './Message';
 import ListItem from './ListItem';
 
 const Dashboard = () => {
-  const [activatedIndex, setActivatedIndex] = useState(0)
+  const [claimableIndex, setclaimableIndex] = useState(0)
   const [exitedValidators, setExitedValidators] = useState(0)
   
-  const [canClaimIndexes, setCanClaimIndexes] = useState<Array<number>>([])
+  const [stakerIndexes, setstakerIndexes] = useState<Array<number>>([])
 
   const [address, setAddress] = useState('')
 
   useEffect(() => {
     // Read the contract
     fetchLatestActivated()
-    .then((latestActivatedIndex:number) => {
-      setActivatedIndex(latestActivatedIndex)
+    .then((latestclaimableIndex:number) => {
+      setclaimableIndex(latestclaimableIndex)
     })
     fetchExitedValidators()
     .then((exitedValidators:number) => {
@@ -30,15 +30,10 @@ const Dashboard = () => {
       fetchStakerIndexes(address)
       .then((indexes:Array<number> | null) => {
         if (indexes) {
-          setCanClaimIndexes(
-            indexes.map((element) => {
-              console.log("adding index ", element, " into canClaimIndexes")
-              return applyDilutionTolerance(element, exitedValidators)
-            })
-          )
+          setstakerIndexes(indexes)
         }
         else {
-          setCanClaimIndexes([])
+          setstakerIndexes([])
         }
       })
     }
@@ -49,15 +44,15 @@ const Dashboard = () => {
   }
 
   function requestFound() {
-    return canClaimIndexes.length !== 0 && activatedIndex !== 0
+    return stakerIndexes.length !== 0 && claimableIndex !== 0
   }
 
   function readyToClaim(index:number) {
-    return index <= (activatedIndex as number)
+    return index < (claimableIndex as number)
   }
 
   function validatorsAhead(index:number) {
-    return index - (activatedIndex as number); 
+    return index - (claimableIndex as number); 
   }
 
   function timeLeft(index:number) {
@@ -73,8 +68,9 @@ const Dashboard = () => {
       <Form onSubmit={handleFormSubmit} />
       <ul>
         {!waitingInput() && requestFound() && 
-          canClaimIndexes.map((ele, index) => {
-            if (readyToClaim(ele)) return <Message type="readyToClaim" key={index} />
+          stakerIndexes.map((ele, index) => {
+            if (readyToClaim(ele)) 
+            return <ListItem type="readyToClaim" key={index} counter={index} />
             return <ListItem type="notReadyToClaim" 
                             key={index}
                             counter={index}
