@@ -71,7 +71,7 @@ export const fetchExitedValidators = async():Promise<number> => {
 
 export const applyDilutionTolerance = (activatedIndex:number, exitedValidators:number) => {
 
-  console.log("indexWithDilutionTolerance: ",activatedIndex+(activatedIndex-1305)*DILUTION_PERCENTAGE)
+  console.log("indexWithDilutionTolerance: ",Math.ceil(activatedIndex+(activatedIndex-1305)*DILUTION_PERCENTAGE))
   return Math.ceil(activatedIndex+(activatedIndex-exitedValidators)*DILUTION_PERCENTAGE)
 }
 

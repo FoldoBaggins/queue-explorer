@@ -14,13 +14,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Read the contract
-    fetchLatestActivated()
-    .then((latestclaimableIndex:number) => {
-      setclaimableIndex(latestclaimableIndex)
-    })
     fetchExitedValidators()
     .then((exitedValidators:number) => {
       setExitedValidators(exitedValidators)
+      fetchLatestActivated()
+      .then((latestclaimableIndex:number) => {
+        setclaimableIndex(applyDilutionTolerance(latestclaimableIndex, exitedValidators))
+      })
     })
   }, []); 
 
