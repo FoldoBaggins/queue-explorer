@@ -87,8 +87,8 @@ const Dashboard = () => {
       }
       <p className='disclaimer'>
         Please note that activations are updated by the LEEQUID Oracles every 12h. 
-        Because of that, you should expect an increase between 0 to 12h to the waiting time.
-
+        Because of that, you should expect waiting an extra 0 to 12h once your position in queue is reached.
+        <br />
         This is a community made app to support the stakers of LEEQUID.
         You can reach me at foldobaggins@gmail.com 
       </p>
